@@ -7,11 +7,6 @@ Pre-requisites:
     - Install Docker
     - EKS Cluster
     
-Clone code from github:
--------
-    git clone https://github.com/vikash-kumar01/spring-cloud-kubernetes.git
-    cd spring-cloud-kubernetes/kubernetes-configmap-reload
-    
 Build Maven Artifact:
 -------
     mvn clean install
