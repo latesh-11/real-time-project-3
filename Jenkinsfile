@@ -94,6 +94,18 @@ pipeline{
                 }
             }
         }
+        stage("Docker Image Scan"){
+            when { expression { params.action == 'create'  } }
+            steps{
+                echo "========executing Docker Image Scan========"
+                
+                script {
+                    dockerimageScan( 
+                        "${params.project}" , "${params.imageTag}" , "${params.userName}"
+                     )
+                }
+            }
+        }
     }
     post{
         always {
