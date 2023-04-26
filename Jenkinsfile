@@ -45,6 +45,13 @@ pipeline{
                 mvnBuild()
             }
         }
+        stage("SonarQube Analysis"){
+            when { expression { params.action == 'create'  } }
+            steps{
+                echo "========executing SonarQube Analysis========"
+                sonarqubeAnalysis()
+            }
+        }
     }
     post{
         always {
