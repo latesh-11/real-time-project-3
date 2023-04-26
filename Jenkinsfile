@@ -5,8 +5,14 @@
 pipeline{
     agent any
 
+    parameters {
+        choice ( name: 'action' , choices: ['Create' , 'Destroy'] , description: "chose Create/Destroy" )
+    }
+
     stages{
         stage("Git checkout"){
+            
+            while { parm.action == 'create' }
             steps{
                 echo "========executing GitCheckout========"
 
@@ -19,18 +25,21 @@ pipeline{
             }
         }
          stage("Unit Test Using Maven"){
+            while { parm.action == 'create' }
             steps{
                 echo "========executing Unit Test Using Mavent========"
                 mvnTest()
             }
         }
          stage("Maven Integration testing"){
+            while { parm.action == 'create' }
             steps{
                 echo "========executing Maven Integration testing========"
                 mvnIntegrationTest()
             }
         }
         stage("Maven build"){
+            while { parm.action == 'create' }
             steps{
                 echo "========executing Maven build========"
                 mvnBuild()
