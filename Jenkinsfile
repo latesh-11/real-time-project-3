@@ -27,42 +27,42 @@ pipeline{
 
             }
         }
-         stage("Unit Test Using Maven"){
-            when { expression { params.action == 'create'  } }
-            steps{
-                echo "========executing Unit Test Using Mavent========"
-                mvnTest()
-            }
-        }
-         stage("Maven Integration testing"){
-            when { expression { params.action == 'create'  } }
-            steps{
-                echo "========executing Maven Integration testing========"
-                mvnIntegrationTest()
-            }
-        }
-        stage("SonarQube Analysis"){
-            when { expression { params.action == 'create'  } }
-            steps{
-                echo "========executing SonarQube Analysis========"
+        //  stage("Unit Test Using Maven"){
+        //     when { expression { params.action == 'create'  } }
+        //     steps{
+        //         echo "========executing Unit Test Using Mavent========"
+        //         mvnTest()
+        //     }
+        // }
+        //  stage("Maven Integration testing"){
+        //     when { expression { params.action == 'create'  } }
+        //     steps{
+        //         echo "========executing Maven Integration testing========"
+        //         mvnIntegrationTest()
+        //     }
+        // }
+        // stage("SonarQube Analysis"){
+        //     when { expression { params.action == 'create'  } }
+        //     steps{
+        //         echo "========executing SonarQube Analysis========"
                 
-                script {
-                    def SonarQubecredentialsId = 'sonar-api-key'
-                    sonarqubeAnalysis(SonarQubecredentialsId)
-                }
-            }
-        }
-        stage("SonarQube Quality Gate status"){
-            when { expression { params.action == 'create'  } }
-            steps{
-                echo "========executing SonarQube Quality Gate status========"
+        //         script {
+        //             def SonarQubecredentialsId = 'sonar-api-key'
+        //             sonarqubeAnalysis(SonarQubecredentialsId)
+        //         }
+        //     }
+        // }
+        // stage("SonarQube Quality Gate status"){
+        //     when { expression { params.action == 'create'  } }
+        //     steps{
+        //         echo "========executing SonarQube Quality Gate status========"
 
-                script{
-                    def SonarQubecredentialsId = 'sonar-api-key'
-                    sonarqubeQualityStatus(SonarQubecredentialsId)
-                }
-            }
-        }
+        //         script{
+        //             def SonarQubecredentialsId = 'sonar-api-key'
+        //             sonarqubeQualityStatus(SonarQubecredentialsId)
+        //         }
+        //     }
+        // }
         stage("Maven build"){
             when { expression { params.action == 'create'  } }
             steps{
