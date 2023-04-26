@@ -49,14 +49,18 @@ pipeline{
             when { expression { params.action == 'create'  } }
             steps{
                 echo "========executing SonarQube Analysis========"
-                sonarqubeAnalysis()
+                sonarqubeAnalysis(
+                    credentialsId: 'sonar-api-key'
+                )
             }
         }
         stage("SonarQube Quality Gate status"){
             when { expression { params.action == 'create'  } }
             steps{
                 echo "========executing SonarQube Quality Gate status========"
-                sonarqubeQualityStatus()
+                sonarqubeQualityStatus(
+                    credentialsId: 'sonar-api-key'
+                )
             }
         }
     }
