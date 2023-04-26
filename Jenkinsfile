@@ -82,6 +82,18 @@ pipeline{
                 }
             }
         }
+        stage("Docker Image Push"){
+            when { expression { params.action == 'create'  } }
+            steps{
+                echo "========executing Docker Image Build========"
+                
+                script {
+                    dockerPush( 
+                        "${params.project}" , "${params.imageTag}" , "${params.userName}"
+                     )
+                }
+            }
+        }
     }
     post{
         always {
