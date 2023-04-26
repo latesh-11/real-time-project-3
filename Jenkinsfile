@@ -24,6 +24,12 @@ pipeline{
                 mvnTest()
             }
         }
+         stage("Maven Integration testing"){
+            steps{
+                echo "========executing Maven Integration testing========"
+                mvnIntegrationTest()
+            }
+        }
     }
     // post{
     //     always {
