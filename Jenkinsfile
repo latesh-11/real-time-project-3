@@ -52,6 +52,13 @@ pipeline{
                 sonarqubeAnalysis()
             }
         }
+        stage("SonarQube Quality Gate status"){
+            when { expression { params.action == 'create'  } }
+            steps{
+                echo "========executing SonarQube Quality Gate status========"
+                sonarqubeQualityStatus()
+            }
+        }
     }
     post{
         always {
