@@ -7,6 +7,9 @@ pipeline{
 
     parameters {
         choice ( name: 'action' , choices: ['create' , 'destroy'] , description: 'chose create/destroy' )
+        string ( name: 'project' , description: 'project name' , default: 'my-proj-03' )
+        string ( name: 'imageTag' , description: 'version name' , default: '1.0.1' )
+        string ( name: 'userName' , description: 'Docker hub user name' , default: 'lateshh' )
     }
 
     stages{
@@ -38,13 +41,6 @@ pipeline{
                 mvnIntegrationTest()
             }
         }
-        stage("Maven build"){
-            when { expression { params.action == 'create'  } }
-            steps{
-                echo "========executing Maven build========"
-                mvnBuild()
-            }
-        }
         stage("SonarQube Analysis"){
             when { expression { params.action == 'create'  } }
             steps{
@@ -64,6 +60,25 @@ pipeline{
                 script{
                     def SonarQubecredentialsId = 'sonar-api-key'
                     sonarqubeQualityStatus(SonarQubecredentialsId)
+                }
+            }
+        }
+        stage("Maven build"){
+            when { expression { params.action == 'create'  } }
+            steps{
+                echo "========executing Maven build========"
+                mvnBuild()
+            }
+        }
+        stage("Docker Image Build"){
+            when { expression { params.action == 'create'  } }
+            steps{
+                echo "========executing Docker Image Build========"
+                
+                script {
+                    dockerBuild( 
+                        "${params.project}" , "${perams.imageTag}" , "${params.userName}"
+                     )
                 }
             }
         }
