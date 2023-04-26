@@ -14,7 +14,7 @@ pipeline{
 
                     // here I am calling gitCheckout form groovy OR this is how I am using Jenkins Shared Library
                     gitCheckout {
-                        branch: "main" ,
+                        branch: "main",
                         url: "https://github.com/latesh-11/real-time-project-3.git"
                     }
 
