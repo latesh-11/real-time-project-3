@@ -51,7 +51,7 @@ pipeline{
                 echo "========executing SonarQube Analysis========"
                 
                 script {
-                    def SonarQubecredentialsId = 'sanar-api-key'
+                    def SonarQubecredentialsId = 'sonar-api-key'
                     sonarqubeAnalysis(SonarQubecredentialsId)
                 }
             }
@@ -62,7 +62,7 @@ pipeline{
                 echo "========executing SonarQube Quality Gate status========"
 
                 script{
-                    def SonarQubecredentialsId = 'sanar-api-key'
+                    def SonarQubecredentialsId = 'sonar-api-key'
                     sonarqubeQualityStatus(SonarQubecredentialsId)
                 }
             }
