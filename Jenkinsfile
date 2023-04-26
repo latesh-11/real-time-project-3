@@ -77,7 +77,7 @@ pipeline{
                 
                 script {
                     dockerBuild( 
-                        "${params.project}" , "${perams.imageTag}" , "${params.userName}"
+                        "${params.project}" , "${params.imageTag}" , "${params.userName}"
                      )
                 }
             }
