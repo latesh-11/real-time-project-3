@@ -12,7 +12,7 @@ pipeline{
     stages{
         stage("Git checkout"){
             
-            when { expression {parma.action == 'create'} }
+            when { expression {param.action == 'create'} }
             steps{
                 echo "========executing GitCheckout========"
 
@@ -25,21 +25,21 @@ pipeline{
             }
         }
          stage("Unit Test Using Maven"){
-            when { expression {parma.action == 'create'} }
+            when { expression {param.action == 'create'} }
             steps{
                 echo "========executing Unit Test Using Mavent========"
                 mvnTest()
             }
         }
          stage("Maven Integration testing"){
-            when { expression {parma.action == 'create'} }
+            when { expression {param.action == 'create'} }
             steps{
                 echo "========executing Maven Integration testing========"
                 mvnIntegrationTest()
             }
         }
         stage("Maven build"){
-            when { expression {parma.action == 'create'} }
+            when { expression {param.action == 'create'} }
             steps{
                 echo "========executing Maven build========"
                 mvnBuild()
