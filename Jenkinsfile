@@ -6,15 +6,15 @@ pipeline{
     agent any
 
     stages{
-        stage('Git checkout'){
+        stage("Git checkout"){
             steps{
                 echo "========executing GitCheckout========"
 
                 // here I am calling gitCheckout form groovy OR this is how I am using Jenkins Shared Library
-                gitCheckout{
+                gitCheckout (
                     branch: "main",
                     url: "https://github.com/latesh-11/real-time-project-3.git"
-                }
+                )
 
             }
         }
