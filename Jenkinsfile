@@ -30,6 +30,12 @@ pipeline{
                 mvnIntegrationTest()
             }
         }
+        stage("Maven build"){
+            steps{
+                echo "========executing Maven build========"
+                mvnBuild()
+            }
+        }
     }
     // post{
     //     always {
