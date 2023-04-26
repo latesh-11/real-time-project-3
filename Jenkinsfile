@@ -18,6 +18,12 @@ pipeline{
 
             }
         }
+         stage("Unit Test Using Maven"){
+            steps{
+                echo "========executing Unit Test Using Mavent========"
+                mvnTest()
+            }
+        }
     }
     // post{
     //     always {
