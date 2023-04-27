@@ -98,22 +98,7 @@ pipeline{
         //         }
         //     }
         // }
-
-
-        // stage("Docker Image Scan"){
-        //     when { expression { params.action == 'create'  } }
-        //     steps{
-        //         echo "========executing Docker Image Scan========"
-                
-        //         script {
-        //             dockerimageScan( 
-        //                 "${params.project}" , "${params.imageTag}" , "${params.userName}"
-        //              )
-        //         }
-        //     }
-        // }
-
-        stage("Docker Image Build By ECR"){
+        stage("Docker Image Build : ECR"){
             when { expression { params.action == 'create'  } }
             steps{
                 echo "========executing Docker Image Build========"
@@ -125,7 +110,31 @@ pipeline{
                 }
             }
         }
-        
+        stage("Docker Image push : ECR"){
+            when { expression { params.action == 'create'  } }
+            steps{
+                echo "========executing Docker Image push========"
+                
+                script {
+                    dockerPush( 
+                        "${params.userName}" , "${params.accountID}" , "${params.region}"
+                     )
+                }
+            }
+        }
+        stage("Docker Image Scan"){
+            when { expression { params.action == 'create'  } }
+            steps{
+                echo "========executing Docker Image Scan========"
+                
+                script {
+                    dockerimageScan( 
+                        "${params.userName}" , "${params.accountID}" , "${params.region}"
+                     )
+                }
+            }
+        }
+
     }
     post{
         always {
