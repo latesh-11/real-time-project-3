@@ -12,7 +12,7 @@ pipeline{
         string ( name: 'userName' , description: 'Docker hub user name' , defaultValue: 'latesh' )
         // ECR PART
         string ( name: 'accountID' , description: 'account ID name ' , defaultValue: '498678202908' )
-        stirng ( name: 'region' , description: 'aws region' , defaultValue: 'us-east-1'  )
+        string ( name: 'region' , description: 'aws region' , defaultValue: 'us-east-1'  )
     }
 
     stages{
