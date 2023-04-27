@@ -8,8 +8,8 @@ pipeline{
     parameters {
         choice ( name: 'action' , choices: ['create' , 'destroy'] , description: 'chose create/destroy' )
         string ( name: 'project' , description: 'project name' , defaultValue: 'my-proj-03' )
-        string ( name: 'imageTag' , description: 'version name' , defaultValue: 'v1' )
-        string ( name: 'userName' , description: 'Docker hub user name' , defaultValue: 'lateshh' )
+        // string ( name: 'imageTag' , description: 'version name' , defaultValue: 'v1' )
+        string ( name: 'userName' , description: 'Docker hub user name' , defaultValue: 'latesh' )
         // ECR PART
         string ( name: 'accountID' , description: 'account ID name ' , defaultValue: '498678202908' )
         stirng ( name: 'region' , description: 'aws region' , defaultValue: 'us-east-1'  )
