@@ -15,11 +15,6 @@ pipeline{
         string ( name: 'region' , description: 'aws region' , defaultValue: 'us-east-1'  )
     }
 
-     environment{
-
-        ACCESS_KEY = credentials('AKIAXIG4JQIOFJKIDBER')
-        SECRET_KEY = credentials("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")
-    }
 
     stages{
         stage("Git checkout"){
