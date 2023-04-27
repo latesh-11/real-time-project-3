@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myJavaApp
+  name: myjavaapp
   labels:
-    app: myJavaApp
+    app: myjavaapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: myJavaApp
+      app: myjavaapp
   template:
     metadata:
       labels:
-        app: myJavaApp
+        app: myjavaapp
     spec:
       containers:
-      - name: myJavaApp
+      - name: myjavaapp
         image: 498678202908.dkr.ecr.us-east-1.amazonaws.com/latesh:latest
         ports:
         - containerPort: 8080
@@ -24,10 +24,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: myJavaApp
+  name: myjavaapp
 spec:
   selector:
-    app: myJavaApp
+    app: myjavaapp
   type: LoadBalancer
   ports:
   - name: http
