@@ -118,7 +118,7 @@ pipeline{
                 script {
                     def credentials = 'AWS_creds'
                     dockerPush( 
-                       "${credentials}", "${params.userName}" , "${params.accountID}" , "${params.region}"
+                       credentials, "${params.userName}" , "${params.accountID}" , "${params.region}"
                      )
                 }
             }
