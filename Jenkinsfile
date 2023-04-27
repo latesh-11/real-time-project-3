@@ -116,7 +116,6 @@ pipeline{
                 echo "========executing Docker Image push========"
                 
                 script {
-                    def AWScredentials = 'AWS_creds'
                     dockerPush( 
                         "${params.userName}" , "${params.accountID}" , "${params.region}"
                      )
