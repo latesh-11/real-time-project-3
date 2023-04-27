@@ -18,7 +18,7 @@ pipeline{
      environment{
 
         ACCESS_KEY = credentials('AKIAXIG4JQIOFJKIDBER')
-        SECRET_KEY = credentials('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')
+        SECRET_KEY = credentials("6hlrmySY4Ha7CSdM/XwSGsId6BHxRLjiTm1HWRIj")
     }
 
     stages{
