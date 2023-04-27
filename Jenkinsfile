@@ -8,8 +8,11 @@ pipeline{
     parameters {
         choice ( name: 'action' , choices: ['create' , 'destroy'] , description: 'chose create/destroy' )
         string ( name: 'project' , description: 'project name' , defaultValue: 'my-proj-03' )
-        string ( name: 'imageTag' , description: 'version name' , defaultValue: '.0.1' )
+        string ( name: 'imageTag' , description: 'version name' , defaultValue: 'v1' )
         string ( name: 'userName' , description: 'Docker hub user name' , defaultValue: 'lateshh' )
+        // ECR PART
+        string ( name: 'accountID' , description: 'account ID name ' , defaultValue: '498678202908' )
+        stirng ( name: 'region' , description: 'aws region' , defaultValue: 'us-east-1'  )
     }
 
     stages{
@@ -70,42 +73,59 @@ pipeline{
                 mvnBuild()
             }
         }
-        stage("Docker Image Build"){
+        // stage("Docker Image Build"){
+        //     when { expression { params.action == 'create'  } }
+        //     steps{
+        //         echo "========executing Docker Image Build========"
+                
+        //         script {
+        //             dockerBuild( 
+        //                 "${params.project}" , "${params.imageTag}" , "${params.userName}"
+        //              )
+        //         }
+        //     }
+        // }
+
+        // stage("Docker Image Push"){
+        //     when { expression { params.action == 'create'  } }
+        //     steps{
+        //         echo "========executing Docker Image Build========"
+                
+        //         script {
+        //             dockerPush( 
+        //                 "${params.project}" , "${params.imageTag}" , "${params.userName}"
+        //              )
+        //         }
+        //     }
+        // }
+
+
+        // stage("Docker Image Scan"){
+        //     when { expression { params.action == 'create'  } }
+        //     steps{
+        //         echo "========executing Docker Image Scan========"
+                
+        //         script {
+        //             dockerimageScan( 
+        //                 "${params.project}" , "${params.imageTag}" , "${params.userName}"
+        //              )
+        //         }
+        //     }
+        // }
+
+        stage("Docker Image Build By ECR"){
             when { expression { params.action == 'create'  } }
             steps{
                 echo "========executing Docker Image Build========"
                 
                 script {
                     dockerBuild( 
-                        "${params.project}" , "${params.imageTag}" , "${params.userName}"
+                        "${params.userName}" , "${params.accountID}" , "${params.region}"
                      )
                 }
             }
         }
-        stage("Docker Image Push"){
-            when { expression { params.action == 'create'  } }
-            steps{
-                echo "========executing Docker Image Build========"
-                
-                script {
-                    dockerPush( 
-                        "${params.project}" , "${params.imageTag}" , "${params.userName}"
-                     )
-                }
-            }
-        }
-        stage("Docker Image Scan"){
-            when { expression { params.action == 'create'  } }
-            steps{
-                echo "========executing Docker Image Scan========"
-                
-                script {
-                    dockerimageScan( 
-                        "${params.project}" , "${params.imageTag}" , "${params.userName}"
-                     )
-                }
-            }
-        }
+        
     }
     post{
         always {
